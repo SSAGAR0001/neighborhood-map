@@ -19,6 +19,6 @@
 + Run index.html on your favourite browser
 
 ## Screenshots
-![Alt text](/screenshots/1.png?raw=true "Sc1") <br />
+![Alt text](/screenshots/1 .png?raw=true "Sc1") <br />
 ![Alt text](/screenshots/2.png?raw=true "Sc2")
 
