@@ -277,7 +277,8 @@ function fetchFourSquare(marker) {
     }).done(function(response) {
         data = response.response.venues;
         if (response) {
-            contentFour = '<br><div id="restaurants">Top Nearby Restaurants:</div><br>';
+            contentFour = '<center><h1>' + marker.title + '</h1></center>';
+            contentFour += '<br><div id="restaurants">Top Nearby Restaurants:</div><br>';
             contentFour += '<ul class="list-group">';
             for (var i = 0; i < 5;) {
                 //For Different Restaurants:
@@ -350,23 +351,12 @@ function highlightMarker(data) {
     if (largeInfowindow.marker != data.location) {
         for (var i = 0; i < markers.length; i++) {
             if (markers[i].title == data.title) {
-                for (var j = 0; j < markers.length; j++) {
-                    markers[j].setVisible(false);
-                }
-                markers[i].setVisible(true);
                 populateInfoWindow(markers[i], largeInfowindow);
                 break;
             }
         }
     }
-    google.maps.event.addListener(largeInfowindow, 'closeclick', function() {
 
-        for (var i = 0; i < markers.length; i++) {
-
-            markers[i].setVisible(true);
-            markers[i].setAnimation(google.maps.Animation.DROP);
-        }
-    });
 }
 
 function showWeather() {
@@ -412,11 +402,29 @@ var ViewModel = {
         ViewModel.list.removeAll();
         if (value == '') {
             ViewModel.showMyList(true);
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setVisible(true);
+            }
             return;
         }
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setVisible(false);
+        }
         for (var location in locations) {
+
             if (locations[location].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
                 ViewModel.list.push(locations[location]);
+
+                var key = locations[location].location;
+                for (var j = 0; j < markers.length; j++) {
+                    if (markers[j].position.lat().toFixed(5) == key.lat.toFixed(5)) {
+                        if (markers[j].position.lng().toFixed(5) == key.lng.toFixed(5)) {
+                            markers[j].setVisible(true);
+                        }
+                    }
+
+                }
+
             }
         }
     },
