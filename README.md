@@ -8,6 +8,8 @@
 + Google Maps API
 + Foursquare API
 
+## Live-Demo
++ (https://jaskanwal96.github.io/neighborhood-map/)
 ## Details
 + This Project shows a listing of certain places in New York 
 + It includes the name and google street view of the particular place.
